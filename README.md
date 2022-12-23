@@ -16,6 +16,7 @@ in the loop but that doesn't mean it won't be.
 
 
 Example usage1:
+
     values = [1,2,3,4]
     for state,value in loop_state(values):
         if state.empty:
@@ -55,7 +56,6 @@ Compared to:
                     print(f"last value = {value}")
                 else:
                     print(f" value{index} = {value})
-
 
 Example code:
 
