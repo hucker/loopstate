@@ -61,7 +61,7 @@ def loop_state(values: Iterable[type_var]) -> Iterable[Tuple[LoopState, type_var
         first = next(iter_values)
     except StopIteration:
         state.empty = True
-        yield state,None
+        yield state, None
         return
 
     # Single item case
@@ -70,7 +70,7 @@ def loop_state(values: Iterable[type_var]) -> Iterable[Tuple[LoopState, type_var
         state.index = 0
         state.empty = False
         previous_value = next(iter_values)
-        yield state,first
+        yield state, first
 
     except StopIteration:
         state.last = True
