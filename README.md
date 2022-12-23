@@ -10,18 +10,18 @@ is done with inline code.
 
 Example usage:
 
-for state,value in loop_state([1,2,3,4]):
-    if state.empty:
-        print("No data").
+    for state,value in loop_state([1,2,3,4]):
+        if state.empty:
+            print("No data").
 
-    elif state.only:
-        print(f"Only item = {value}")
+        elif state.only:
+            print(f"Only item = {value}")
 
-    elif state.first:
-        print(f"First item - {value}")
+        elif state.first:
+            print(f"First item - {value}")
 
-    elif state.last:
-        print("fLast Item - {value}")
+        elif state.last:
+            print("fLast Item - {value}")
 
-    elif state.index >= 0:
-        print(f" {state.index} Item={value}")
+        elif state.index >= 0:
+            print(f" {state.index} Item={value}")
