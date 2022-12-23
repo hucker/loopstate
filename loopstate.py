@@ -61,7 +61,7 @@ def loop_state(values: Iterable[type_var]) -> Iterable[Tuple[LoopState, type_var
 
     # Passed None fail gracefully with no exception
     if values is None:
-        yield state, None
+        yield None, state
         return
 
     iter_values = iter(values)
@@ -71,7 +71,7 @@ def loop_state(values: Iterable[type_var]) -> Iterable[Tuple[LoopState, type_var
         first = next(iter_values)
     except StopIteration:
         state.empty = True
-        yield state, None
+        yield None, state
         return
 
     # Single item case
@@ -80,12 +80,12 @@ def loop_state(values: Iterable[type_var]) -> Iterable[Tuple[LoopState, type_var
         state.index = 0
         state.empty = False
         previous_value = next(iter_values)
-        yield state, first
+        yield first, state
 
     except StopIteration:
         state.last = True
         state.only = True
-        yield state, first
+        yield first, state
         return
 
     # Yield everything but the first and last items
@@ -93,10 +93,10 @@ def loop_state(values: Iterable[type_var]) -> Iterable[Tuple[LoopState, type_var
     state.only = False
     for value in iter_values:
         state.index += 1
-        yield state, previous_value
+        yield previous_value, state
         previous_value = value
 
     # And finally yield the last item
     state.last = True
     state.index += 1
-    yield state, previous_value
+    yield previous_value, state

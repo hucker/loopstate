@@ -16,7 +16,7 @@ def test_empty():
     """ Empty list """
     values = []
 
-    for state, _ in loop_state(values):
+    for _, state in loop_state(values):
         assert state.empty is True
         assert state.index == -1
         assert state.first is False
@@ -28,7 +28,7 @@ def test_None():
     """ Empty list """
     values = None
 
-    for state, _ in loop_state(values):
+    for _, state in loop_state(values):
         assert state.empty is True
         assert state.index == -1
         assert state.first is False
@@ -40,7 +40,7 @@ def test_single():
     """ Single item list - only """
     values = [1]
 
-    for state, value in loop_state(values):
+    for value, state in loop_state(values):
         assert state.empty is False
         assert state.index == 0
         assert state.first is True
@@ -53,7 +53,7 @@ def test_more_than_two():
     """ Normal list with beginning middle and end"""
     values = [1, 2, 3]
     seq = loop_state(values)
-    state, value = next(seq)
+    value, state = next(seq)
     assert state.empty is False
     assert state.index == 0
     assert state.first is True
@@ -61,7 +61,7 @@ def test_more_than_two():
     assert state.last is False
     assert value == 1
 
-    state, value = next(seq)
+    value, state = next(seq)
     assert state.empty is False
     assert state.index == 1
     assert state.first is False
@@ -69,7 +69,7 @@ def test_more_than_two():
     assert state.last is False
     assert value == 2
 
-    state, value = next(seq)
+    value, state= next(seq)
     assert state.empty is False
     assert state.index == 2
     assert state.first is False
@@ -80,7 +80,7 @@ def test_more_than_two():
 
 def test_normal_empty_use_case():
     """ Check an empty iterator """
-    for state, _ in loop_state([]):
+    for _, state in loop_state([]):
         assert state.empty is True
         assert state.index == -1
         assert state.first is False
@@ -90,7 +90,7 @@ def test_normal_empty_use_case():
 
 def test_normal_single_time_case():
     """ Test list with one item to verify .only """
-    for state, value in loop_state([1]):
+    for value, state in loop_state([1]):
         if value == 1:
             assert state.first is True
             assert state.only is True
@@ -120,7 +120,7 @@ def test_normal_more_than_two_case():
 
 def test_loop_case2():
     """ Verifiy all the states for a list > 2 """
-    for state, value in loop_state([1, 2, 3]):
+    for value, state in loop_state([1, 2, 3]):
         if state.first:
             assert value == 1
             assert state.only is False
@@ -141,13 +141,13 @@ def test_loop_case2():
 
 def test_loop_case3():
     """ Empty list test """
-    for state, _ in loop_state([]):
+    for _, state in loop_state([]):
         assert state.empty is True
 
 
 def test_loop_case1():
     
-    for state, value in loop_state([1]):
+    for value, state in loop_state([1]):
         assert state.empty is False
         assert state.only is True
         assert state.first is True
@@ -159,7 +159,7 @@ def test_loop_case1():
 def test_loop_gen_1():
     """ verify that state works with a generator """
     seq = range(1)
-    for state, value in loop_state(seq):
+    for value, state in loop_state(seq):
         assert state.empty is False
         assert state.only is True
         assert state.first is True
@@ -171,7 +171,7 @@ def test_loop_gen_1():
 def test_loop_gen_2():
     """ verify that state works with a generator """
     seq = range(2)
-    for state, value in loop_state(seq):
+    for value, state in loop_state(seq):
         if state.index == 0:
             assert state.empty is False
             assert state.only is False
@@ -186,3 +186,21 @@ def test_loop_gen_2():
             assert state.last is True
             assert state.index == 1
             assert value == 1
+
+
+def test_loop_dropin():
+    values = [1, 2, 3]
+    gvalues = [value for value, state in loop_state(values)]
+    for v,g in zip(values,gvalues):
+        assert v == g
+                
+    values = [1]
+    gvalues = [value for value, state in loop_state(values)]
+    for v,g in zip(values,gvalues):
+        assert v == g
+
+    values = []
+    gvalues = [value for value, state in loop_state(values)]
+    for v,g in zip(values,gvalues):
+        assert v == g
+                                
