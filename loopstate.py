@@ -62,6 +62,7 @@ def loop_state(values: Iterable[type_var]) -> Iterable[Tuple[LoopState, type_var
     # Passed None fail gracefully with no exception
     if values is None:
         yield state, None
+        return
 
     iter_values = iter(values)
 
