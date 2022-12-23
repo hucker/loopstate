@@ -9,6 +9,9 @@ The code also reduced the use of exceptions for managing the state of the loop.
 The code as been optimized to have zero if statements.  All of the tracking
 is done with inline code.
 
+Because it tracks state state, loop state is a soft replacement for the
+enumerate function because one of the values it tracks is the index.
+
 Example usage:
 
 for state,value in loop_state([1,2,3,4]):
