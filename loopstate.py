@@ -58,7 +58,7 @@ def loop_state(values: Iterable[type_var]) -> Iterable[Tuple[LoopState, type_var
     get right.
     """
     state = LoopState()
-    
+
     # Passed None fail gracefully with no exception
     if values is None:
         yield state, None
