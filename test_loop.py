@@ -66,6 +66,7 @@ def test_more_than_two():
 
 
 def test_normal_empty_use_case():
+    """ Check an empty iterator """
     for state, _ in loop_state([]):
         assert state.empty is True
         assert state.index == -1
@@ -75,6 +76,7 @@ def test_normal_empty_use_case():
 
 
 def test_normal_single_time_case():
+    """ Test list with one item to verify .only """
     for state, value in loop_state([1]):
         if value == 1:
             assert state.first is True
@@ -84,6 +86,7 @@ def test_normal_single_time_case():
 
 
 def test_normal_more_than_two_case():
+    """ verify individual values in loop """
     for state, value in loop_state([1, 2, 3]):
         if value == 1:
             assert state.first is True
@@ -103,6 +106,7 @@ def test_normal_more_than_two_case():
 
 
 def test_loop_case2():
+    """ Verifiy all the states for a list > 2 """
     for state, value in loop_state([1, 2, 3]):
         if state.first:
             assert value == 1
@@ -129,6 +133,7 @@ def test_loop_case3():
 
 
 def test_loop_case1():
+    
     for state, value in loop_state([1]):
         assert state.empty is False
         assert state.only is True
@@ -139,6 +144,7 @@ def test_loop_case1():
 
 
 def test_loop_gen_1():
+    """ verify that state works with a generator """
     seq = range(1)
     for state, value in loop_state(seq):
         assert state.empty is False
@@ -150,6 +156,7 @@ def test_loop_gen_1():
 
 
 def test_loop_gen_2():
+    """ verify that state works with a generator """
     seq = range(2)
     for state, value in loop_state(seq):
         if state.index == 0:
