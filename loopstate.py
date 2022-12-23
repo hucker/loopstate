@@ -47,6 +47,7 @@ class LoopState:
     empty: bool = True
     index: int = -1
 
+
 def loop_state(values: Iterable[type_var]) -> Iterable[Tuple[LoopState, type_var]]:
     """
     Iterate and generate state data related to iterating over a sequence.
@@ -61,7 +62,7 @@ def loop_state(values: Iterable[type_var]) -> Iterable[Tuple[LoopState, type_var
     # Passed None fail gracefully with no exception
     if values is None:
         yield state, None
-    
+
     iter_values = iter(values)
 
     # Empty Case
@@ -83,7 +84,7 @@ def loop_state(values: Iterable[type_var]) -> Iterable[Tuple[LoopState, type_var
     except StopIteration:
         state.last = True
         state.only = True
-        yield state,first
+        yield state, first
         return
 
     # Yield everything but the first and last items
