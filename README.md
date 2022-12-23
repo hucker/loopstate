@@ -19,7 +19,7 @@ test.
 Example usage1:
 
     values = [1,2,3,4]
-    for state,value in loop_state(values):
+    for value, state in loop_state(values):
         if state.empty:
             print("No data").
 
@@ -62,7 +62,7 @@ Example code:
 
     api->. draw_item(is_first, is_last, item)
     
-    for state,item in loop_state(items):
+    for item, state in loop_state(items):
         draw_item(state.first,state.last,item)
         
 Compared to:
