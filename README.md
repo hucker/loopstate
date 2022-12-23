@@ -5,14 +5,15 @@ The low level code ooperates on iterators and requires no if statements. The
 state of the iterator visible in properties so top level code is more readable.
 
 The code below shows a comparison of usage.  While the number of lines of code
-is similar, the regular python code has two things happening, printing of values
-and inspecting/tracking of state.  Often times tracking state requires operating
-on the whole list to find the lenght or possible using the slice operator
-which needs random access. 
+is similar, the code that uses the loop_state iterator hides away all of the
+bookkeeping so it is clear that belongs to what in the body of the loop.
 
-Determining the lastitem in the list in code is often done by calling len
-which can be a costly operation if it is inside the loop.  It shouldn't be
-in the loop but that doesn't mean it won't be.
+In the versions that don't use the state tracking the code is doing two things
+and it isn't clear which is which...depending on how much code you've looked at.
+
+Probably more importantly, loop_state can be throughly tested and know that
+it handles the edge cases whereas user code might prove far more difficult to
+test.
 
 
 Example usage1:
@@ -65,13 +66,14 @@ Example code:
         draw_item(state.first,state.last,item)
         
 Compared to:
+
     count = len(items)
     for index,item in enumerate(items):
         first = (index==0)
         last = (index==count-1)
         draw_item(first,last,item)
         
-    or the rather terse:
+or the rather terse:
     
     count = len(items)
     for index,item in enumerate(items):
