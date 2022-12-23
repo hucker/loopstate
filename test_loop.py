@@ -123,6 +123,7 @@ def test_loop_case2():
 
 
 def test_loop_case3():
+    """ Empty list test """
     for state, _ in loop_state([]):
         assert state.empty is True
 
