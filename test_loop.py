@@ -1,3 +1,4 @@
+import pytest
 from loopstate import LoopState,loop_state
 
 
@@ -14,6 +15,18 @@ def test_data_class():
 def test_empty():
     """ Empty list """
     values = []
+
+    for state, _ in loop_state(values):
+        assert state.empty is True
+        assert state.index == -1
+        assert state.first is False
+        assert state.only is False
+        assert state.last is False
+
+
+def test_None():
+    """ Empty list """
+    values = None
 
     for state, _ in loop_state(values):
         assert state.empty is True
