@@ -1,3 +1,5 @@
+""" Pytest code for the toopstate iterator """
+
 # import pytest
 from loopstate import LoopState, loop_state
 
@@ -205,4 +207,3 @@ def test_loop_dropin():
     gvalues = [value for value, state in loop_state(values)]
     for val, gval in zip(values, gvalues):
         assert val == gval
-
