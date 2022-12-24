@@ -43,17 +43,19 @@ T = TypeVar("T")
 
 @dataclass
 class LoopState:
-    """State of loop. Initialize to 'empty loop' state """
-    first: bool = False    # First item in loop
-    last: bool = False     # Last item in loop
-    only: bool = False     # Only item in loop
-    empty: bool = True     # Loop is empty
-    index: int = -1        # Index of item in loop
+    """State of loop. Initialize to 'empty loop' state"""
+
+    first: bool = False  # First item in loop
+    last: bool = False  # Last item in loop
+    only: bool = False  # Only item in loop
+    empty: bool = True  # Loop is empty
+    index: int = -1  # Index of item in loop
+
 
 
 def loop_state(values: Iterable[T]) -> Iterable[Tuple[T, LoopState]]:
     """
-    Iterate and generate state data related to iterating over a sequence.
+    Iterate and generate state data related to a sequence.
 
     By looking at the state variable you can tell if the loop item is
     the first, last, only value in a sequence, if the sequence is empty
@@ -73,7 +75,6 @@ def loop_state(values: Iterable[T]) -> Iterable[Tuple[T, LoopState]]:
     try:
         first = next(iter_values)
     except StopIteration:
-        state.empty = True
         yield None, state
         return
 
