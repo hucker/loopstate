@@ -52,7 +52,6 @@ class LoopState:
     index: int = -1  # Index of item in loop
 
 
-
 def loop_state(values: Iterable[T]) -> Iterable[Tuple[T, LoopState]]:
     """
     Iterate and generate state data related to a sequence.
