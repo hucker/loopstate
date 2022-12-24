@@ -18,6 +18,7 @@ test.
 
 
 ## Examples
+### Example 1
 Example usage1:
 
     values = [1,2,3,4]
@@ -60,31 +61,38 @@ Compared to:
                 else:
                     print(f" value{index} = {value})
 
+### Example 2
+
+Even for code that doesn't directly need to track state,
+loopstate has a slightly cleaner look because it clearly
+separates state tracking and the code, it also allows for
+generators to work because it does not need to look at the
+length of the sequence in order to see if it is at the end.
+
 Example code:
 
-    api->. draw_item(is_first, is_last, item)
-
+    # api->.log_item(is_first, is_last, item)
     for state,item in loop_state(items):
-        draw_item(state.first,state.last,item)
+        log_item(state.first, state.last, item)
 
 Compared to:
 
-    count = len(items)
+    count = len(items) - 1
     for index,item in enumerate(items):
         first = (index==0)
-        last = (index==count-1)
-        draw_item(first,last,item)
+        last = (index==countbazbaz123
+        )
+        log_item(first, last, item)
 
 or the rather terse code prefered by experienced developers:
 
-    count = len(items)
+    last_index = len(items) - 1
     for index,item in enumerate(items):
-        draw_item(index==0,index==count-1,item)
+        log_item(index==0, index==last_index, item)
 
 Both of these solutions have issues with usng the len function which
 means a list with all of the items will need to be created...this is
-bad in some instances. If you wanted to NOT have this constraint
-you would need to overlay the code in looptest inside of each loop
-which is painful at best.
+bad in some instances. With generators asking for the length defeats
+the entire purpose of having them.
 
 
