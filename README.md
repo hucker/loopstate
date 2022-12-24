@@ -1,16 +1,19 @@
 # loopstate
 Textual inspired loop state tracker.
 
-LoopState simplifies complex code by removing code structures that track state.
-The low level code ooperates on iterators and requires no if statements. The
-state of the iterator visible in properties so top level code is more readable.
+LoopState simplifies complex loop state code by removing code structures 
+that track state at the point of use.
+
+The low level code operates on iterators and requires no if statements, knowlege
+of the lenth of the sequence allowing for generators and 'normal' sequences
+to work as expected.
 
 The code below shows a comparison of usage.  While the number of lines of code
 is similar, the code that uses the loop_state iterator hides away all of the
-bookkeeping so it is clear that belongs to what in the body of the loop.
+bookkeeping so as to minimize the code required to track state.
 
 In the versions that don't use the state tracking the code is doing two things
-and it isn't clear which is which...depending on how much code you've looked at.
+and it isn't obvious which is which...depending on how much code you've looked at.
 
 Probably more importantly, loop_state can be throughly tested and know that
 it handles the edge cases whereas user code might prove far more difficult to
@@ -18,6 +21,7 @@ test.
 
 
 ## Examples
+
 ### Example 1
 Example usage1:
 
