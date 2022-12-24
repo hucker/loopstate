@@ -193,7 +193,7 @@ def test_loop_dropin():
     """ Verify that the loop_state generator can drop into a list comprehension"""
     values = [1, 2, 3]
     gvalues = [value for value, state in loop_state(values)]
-    for v,g in zip(values,gvalues):
+    for v, g in zip(values,gvalues):
         assert v == g
 
     values = [1]
