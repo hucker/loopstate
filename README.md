@@ -1,6 +1,7 @@
+# loopstate
 Textual inspired loop state tracker.
 
-LoopState simplifies complex code by removing code structures that track state.  
+LoopState simplifies complex code by removing code structures that track state.
 The low level code ooperates on iterators and requires no if statements. The
 state of the iterator visible in properties so top level code is more readable.
 
@@ -16,6 +17,7 @@ it handles the edge cases whereas user code might prove far more difficult to
 test.
 
 
+## Examples
 Example usage1:
 
     values = [1,2,3,4]
@@ -36,9 +38,9 @@ Example usage1:
             print(f" {state.index} Item={value}")
 
 Compared to:
-    
+
     values = [1,2,3,4]
-    
+
     if not values:
         print("no data")
     else:
@@ -61,10 +63,10 @@ Compared to:
 Example code:
 
     api->. draw_item(is_first, is_last, item)
-    
+
     for state,item in loop_state(items):
         draw_item(state.first,state.last,item)
-        
+
 Compared to:
 
     count = len(items)
@@ -72,13 +74,17 @@ Compared to:
         first = (index==0)
         last = (index==count-1)
         draw_item(first,last,item)
-        
-or the rather terse:
-    
+
+or the rather terse code prefered by experienced developers:
+
     count = len(items)
     for index,item in enumerate(items):
         draw_item(index==0,index==count-1,item)
-    
-    
 
-        
+Both of these solutions have issues with usng the len function which
+means a list with all of the items will need to be created...this is
+bad in some instances. If you wanted to NOT have this constraint
+you would need to overlay the code in looptest inside of each loop
+which is painful at best.
+
+

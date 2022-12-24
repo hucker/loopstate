@@ -14,7 +14,7 @@ enumerate function because one of the values it tracks is the index.
 
 Example usage:
 
-for state,value in loop_state([1,2,3,4]):
+for value,state in loop_state([1,2,3,4]):
     if state.empty:
         print("No data").
 
@@ -30,25 +30,28 @@ for state,value in loop_state([1,2,3,4]):
     elif state.index >= 0:
         print(f" {state.index} Item={value}")
 
+Enumerate Example:
+    for value,state in loop_state([1,2,3,4]):
+        print(f"{state.index+1} -> {value})
 
 """
-from typing import Iterable, Tuple, TypeVar
+from typing import Iterable, TypeVar, Tuple
 from dataclasses import dataclass
 
-type_var = TypeVar("type_var")
+T = TypeVar("T")
 
 
 @dataclass
 class LoopState:
     """State of loop. Initialize to 'empty loop' state """
-    first: bool = False
-    last: bool = False
-    only: bool = False
-    empty: bool = True
-    index: int = -1
+    first: bool = False    # First item in loop
+    last: bool = False     # Last item in loop
+    only: bool = False     # Only item in loop
+    empty: bool = True     # Loop is empty
+    index: int = -1        # Index of item in loop
 
 
-def loop_state(values: Iterable[type_var]) -> Iterable[Tuple[LoopState, type_var]]:
+def loop_state(values: Iterable[T]) -> Iterable[Tuple[T, LoopState]]:
     """
     Iterate and generate state data related to iterating over a sequence.
 

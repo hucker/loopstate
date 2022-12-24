@@ -1,4 +1,4 @@
-import pytest
+#import pytest
 from loopstate import LoopState,loop_state
 
 
@@ -24,8 +24,8 @@ def test_empty():
         assert state.last is False
 
 
-def test_None():
-    """ Empty list """
+def test_none():
+    """ Empty list.  It can be argued that this is a bad feature """
     values = None
 
     for _, state in loop_state(values):
@@ -146,7 +146,8 @@ def test_loop_case3():
 
 
 def test_loop_case1():
-    
+    """ Single item list test """
+
     for value, state in loop_state([1]):
         assert state.empty is False
         assert state.only is True
@@ -189,18 +190,18 @@ def test_loop_gen_2():
 
 
 def test_loop_dropin():
+    """ Verify that the loop_state generator can drop into a list comprehension"""
     values = [1, 2, 3]
     gvalues = [value for value, state in loop_state(values)]
     for v,g in zip(values,gvalues):
         assert v == g
-                
+
     values = [1]
     gvalues = [value for value, state in loop_state(values)]
-    for v,g in zip(values,gvalues):
-        assert v == g
+    for val, gval in zip(values,gvalues):
+        assert val == gval
 
     values = []
     gvalues = [value for value, state in loop_state(values)]
-    for v,g in zip(values,gvalues):
-        assert v == g
-                                
+    for val, gval in zip(values,gvalues):
+        assert val == gval
