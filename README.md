@@ -22,7 +22,7 @@ test.
 Example usage1:
 
     values = [1,2,3,4]
-    for state,value in loop_state(values):
+    for value, state in loop_state(values):
         if state.empty:
             print("No data").
 
@@ -71,10 +71,18 @@ length of the sequence in order to see if it is at the end.
 
 Example code:
 
+<<<<<<< HEAD
     # api->.log_item(is_first, is_last, item)
     for state,item in loop_state(items):
         log_item(state.first, state.last, item)
 
+=======
+    api->. draw_item(is_first, is_last, item)
+    
+    for item, state in loop_state(items):
+        draw_item(state.first,state.last,item)
+        
+>>>>>>> 5f7d4483034268e42d4f2e23191f3e88ef7f0c3f
 Compared to:
 
     count = len(items) - 1
