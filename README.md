@@ -80,10 +80,10 @@ Example code:
 
 
 ```python
-    count = len(items) - 1
+    last_index = len(items) - 1
     for index,item in enumerate(items):
-        first = (index==0)
-        last = (index==count)
+        first = (index == 0)
+        last = (index == last_index)
         log_item(first, last, item)
 ```
 
@@ -92,12 +92,18 @@ or the rather terse code prefered by experienced developers:
 ```python
     last_index = len(items) - 1
     for index,item in enumerate(items):
-        log_item(index==0, index==last_index, item)
+        log_item(index == 0, index == last_index, item)
 ```
 
 Both of these solutions have issues with usng the len function which
 means a list with all of the items will need to be created...this is
-bad in some instances. With generators asking for the length defeats
-the entire purpose of having them.
+bad in some instances. Arguably they both have an issue with code that
+is inspecting the sequence causing two "things" to be happening in 
+he loop.   There is also the fatal flaw of using the len funciton
+to aske the length of the loop, this will be a bad idea if sour 
+items are coming from a generator.
 
-
+```python
+    for item,state in loop_state(items):
+        log_item(state.first, state.last, item)
+```
