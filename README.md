@@ -97,11 +97,10 @@ or the rather terse code prefered by experienced developers:
 
 Both of these solutions have issues with usng the len function which
 means a list with all of the items will need to be created...this is
-bad in some instances. Arguably they both have an issue with code that
-is inspecting the sequence causing two "things" to be happening in 
-he loop.   There is also the fatal flaw of using the len funciton
-to aske the length of the loop, this will be a bad idea if sour 
-items are coming from a generator.
+bad in when using generators. Arguably they both have an issue with code that
+has two things happening.
+
+The final python code looks like this.  Simple and concise.
 
 ```python
     for item,state in loop_state(items):
