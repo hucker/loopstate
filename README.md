@@ -29,7 +29,7 @@ Example usage1:
     values = [1,2,3,4]
     for value, state in loop_state(values):
         if state.empty:
-            print("No data").
+            print("No data")
 
         elif state.only:
             print(f"Only item = {value}")
