@@ -25,6 +25,7 @@ test.
 ### Example 1
 Example usage1:
 
+```python
     values = [1,2,3,4]
     for value, state in loop_state(values):
         if state.empty:
@@ -41,9 +42,10 @@ Example usage1:
 
         elif state.index >= 0:
             print(f" {state.index} Item={value}")
-
+```
 Compared to:
 
+```python
     values = [1,2,3,4]
 
     if not values:
@@ -64,6 +66,7 @@ Compared to:
                     print(f"last value = {value}")
                 else:
                     print(f" value{index} = {value})
+```
 
 ### Example 2
 
@@ -76,17 +79,21 @@ length of the sequence in order to see if it is at the end.
 Example code:
 
 
+```python
     count = len(items) - 1
     for index,item in enumerate(items):
         first = (index==0)
         last = (index==count)
         log_item(first, last, item)
+```
 
 or the rather terse code prefered by experienced developers:
 
+```python
     last_index = len(items) - 1
     for index,item in enumerate(items):
         log_item(index==0, index==last_index, item)
+```
 
 Both of these solutions have issues with usng the len function which
 means a list with all of the items will need to be created...this is
