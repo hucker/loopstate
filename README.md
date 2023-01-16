@@ -25,10 +25,11 @@ test.
 ### Example 1
 Example usage1:
 
+```python
     values = [1,2,3,4]
     for value, state in loop_state(values):
         if state.empty:
-            print("No data").
+            print("No data")
 
         elif state.only:
             print(f"Only item = {value}")
@@ -41,9 +42,10 @@ Example usage1:
 
         elif state.index >= 0:
             print(f" {state.index} Item={value}")
-
+```
 Compared to:
 
+```python
     values = [1,2,3,4]
 
     if not values:
@@ -64,6 +66,7 @@ Compared to:
                     print(f"last value = {value}")
                 else:
                     print(f" value{index} = {value})
+```
 
 ### Example 2
 
@@ -76,19 +79,23 @@ length of the sequence in order to see if it is at the end.
 Example code:
 
 
-    count = len(items) - 1
+```python
+    last_index = len(items) - 1
     for index,item in enumerate(items):
-        first = (index==0)
-        last = (index==count)
+        first = (index == 0)
+        last = (index == last_index)
         log_item(first, last, item)
+```
 
 or the rather terse code prefered by experienced developers:
 
+```python
     last_index = len(items) - 1
     for index,item in enumerate(items):
-        log_item(index==0, index==last_index, item)
+        log_item(index == 0, index == last_index, item)
+```
 
-Both of these solutions have issues with using the len function which
+Both of these solutions have issues with usng the len function which
 means a list with all of the items will need to be created...this is
 bad in some instances. With generators asking for the length defeats
 the entire purpose of having them.  To work without len, the code
@@ -101,4 +108,9 @@ With looop state you end with this:
         log_item(state.first,state.last,value)
 
 
+The final python code looks like this.  Simple and generator friendly.
 
+```python
+    for item,state in loop_state(items):
+        log_item(state.first, state.last, item)
+```
