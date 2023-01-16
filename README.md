@@ -102,13 +102,8 @@ the entire purpose of having them.  To work without len, the code
 would need to implement all/partof the underlying loop state tracking
 mechanism.
 
-With looop state you end with this:
 
-    for value,state in loopstate(items):
-        log_item(state.first,state.last,value)
-
-
-The final python code looks like this.  Simple and generator friendly.
+The final python code looks like this.  Simple, and generator friendly.
 
 ```python
     for item,state in loop_state(items):
