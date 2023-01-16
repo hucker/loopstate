@@ -1,7 +1,7 @@
 # loopstate
 Textual inspired loop state tracker.
 
-LoopState simplifies complex loop state code by removing code structures 
+LoopState simplifies complex loop state code by removing code structures
 that track state at the point of use.
 
 The low level code operates on iterators and requires no if statements, knowlege
@@ -88,9 +88,17 @@ or the rather terse code prefered by experienced developers:
     for index,item in enumerate(items):
         log_item(index==0, index==last_index, item)
 
-Both of these solutions have issues with usng the len function which
+Both of these solutions have issues with using the len function which
 means a list with all of the items will need to be created...this is
 bad in some instances. With generators asking for the length defeats
-the entire purpose of having them.
+the entire purpose of having them.  To work without len, the code
+would need to implement all/partof the underlying loop state tracking
+mechanism.
+
+With looop state you end with this:
+
+    for value,state in loopstate(items):
+        log_item(state.first,state.last,value)
+
 
 
