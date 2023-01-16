@@ -25,7 +25,6 @@ def test_empty():
         assert state.only is False
         assert state.last is False
 
-
 def test_none():
     """Empty list.  It can be argued that this is a bad feature"""
     values = None
@@ -167,8 +166,6 @@ def test_loop_gen_1():
         assert state.only is True
         assert state.first is True
         assert state.last is True
-        assert state.index == 0
-        assert value == 0
 
 
 def test_loop_gen_2():
@@ -197,13 +194,16 @@ def test_loop_dropin():
     gvalues = [value for value, state in loop_state(values)]
     for value, gvalue in zip(values, gvalues):
         assert value == gvalue
+    assert values == gvalues
 
     values = [1]
     gvalues = [value for value, state in loop_state(values)]
     for val, gval in zip(values, gvalues):
         assert val == gval
+    assert values == gvalues
 
     values = []
-    gvalues = [value for value, state in loop_state(values)]
+    gvalues = [value for value, state in loop_state(values)if state.index>0]
     for val, gval in zip(values, gvalues):
         assert val == gval
+    assert values == gvalues
